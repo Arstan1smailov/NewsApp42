@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.Border.BoardFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -10,5 +11,15 @@
         android:id="@+id/ViewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+    <TextView
+        android:id="@+id/btnSkip2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:padding="23dp"
+        android:textSize="24sp"
+        android:text="Skip"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,6 +10,13 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import android.util.Log;
+import com.company.interfaces.OnItemClickListener;
+import com.company.models.News;
+import com.company.newsapp41.R;
+import com.company.newsapp41.databinding.FragmentHomeBinding;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
