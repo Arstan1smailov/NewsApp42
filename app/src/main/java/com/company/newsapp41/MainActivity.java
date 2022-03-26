@@ -28,9 +28,9 @@ import java.io.File;
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
+    private Prefs prefs;
     private EditText Et;
     private ImageView Image;
-    private Prefs prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,8 +68,7 @@ public class MainActivity extends AppCompatActivity {
     }
     @Override
     public boolean onCreateOptionsMenu (Menu menu){
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.settings_menu, menu);
+        menu.add(0,1,0,"clean cash");
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -77,12 +76,11 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         Et = findViewById(R.id.profileEditText);
         Image = findViewById(R.id.imageView);
-        Toast.makeText(this, "Cleared successfully!", Toast.LENGTH_SHORT).show();
+
         Et.setText("");
         Image.setImageResource(R.drawable.photo2);
-        prefs.saveProfileEditText("");
+        prefs.prefsCash();
 
-        prefs.clearPreferences();
-        return true;
+        return super.onOptionsItemSelected(item);
     }
 }
