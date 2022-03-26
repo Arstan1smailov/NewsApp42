@@ -10,6 +10,7 @@
         android:id="@+id/imageView"
         android:src="@drawable/photo2"
         android:layout_width="300dp"
+        android:background="@drawable/circle"
         android:layout_height="300dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -19,6 +20,8 @@
     <EditText
         android:id="@+id/profileEditText"
         android:hint="Введите ваш username"
+        android:maxLength="32"
+        android:textAlignment="center"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"

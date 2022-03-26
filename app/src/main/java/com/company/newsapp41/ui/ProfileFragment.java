@@ -19,23 +19,22 @@ import android.view.ViewGroup;
 import com.bumptech.glide.Glide;
 import com.company.Prefs;
 import com.company.newsapp41.databinding.FragmentProfileBinding;
+import com.company.newsapp41.ui.Border.BoardAdapter;
 
 public class ProfileFragment extends Fragment {
 
     private FragmentProfileBinding binding;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        binding = FragmentProfileBinding.inflate(inflater,container,false);
+        binding = FragmentProfileBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         Prefs prefs = new Prefs(requireContext());
         binding.profileEditText.setText(prefs.getProfileEditText());
         if (prefs.getImageUri()!=null){
@@ -72,5 +71,6 @@ public class ProfileFragment extends Fragment {
             }
         }
     });
+
 
 }

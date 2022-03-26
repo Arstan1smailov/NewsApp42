@@ -3,7 +3,10 @@ package com.company.newsapp41;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.company.Prefs;
@@ -21,13 +24,12 @@ import androidx.navigation.ui.NavigationUI;
 import com.company.newsapp41.databinding.ActivityMainBinding;
 
 import java.io.File;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
+    private EditText Et;
+    private ImageView Image;
     private Prefs prefs;
 
     @Override
@@ -43,11 +45,11 @@ public class MainActivity extends AppCompatActivity {
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
                 .build();
+        prefs = new Prefs(this);
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
-        Prefs prefs = new Prefs(this);
-        if (!prefs.isBoardShown()) {
+        if (true) {
             navController.navigate(R.id.boardFragment);
         }
         navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
@@ -64,7 +66,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    public boolean onCreateOptionsMenu(Menu menu) {
+    @Override
+    public boolean onCreateOptionsMenu (Menu menu){
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.settings_menu, menu);
         return super.onCreateOptionsMenu(menu);
@@ -72,11 +75,14 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.clear_pref: prefs.clearPreferences();
-                Toast.makeText(this, "Данные были очищены", Toast.LENGTH_SHORT).show();
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
+        Et = findViewById(R.id.profileEditText);
+        Image = findViewById(R.id.imageView);
+        Toast.makeText(this, "Cleared successfully!", Toast.LENGTH_SHORT).show();
+        Et.setText("");
+        Image.setImageResource(R.drawable.photo2);
+        prefs.saveProfileEditText("");
+
+        prefs.clearPreferences();
+        return true;
     }
-    }
+}

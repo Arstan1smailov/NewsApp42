@@ -1,48 +1,35 @@
 package com.company.newsapp41.ui.Border;
 
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.TextView;
-
-import android.app.Activity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.RecyclerView;
-import java.util.ArrayList;
-
-import androidx.annotation.NonNull;
-import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.company.models.Board;
 import com.company.newsapp41.R;
+import com.company.newsapp41.databinding.PagerBoardBinding;
 
 import java.util.ArrayList;
 
 public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.ViewHolder> {
 
-    private ArrayList<Board> list;
+    public ArrayList<Board> list;
     public boolean A = false;
 
     public BoardAdapter() {
         list = new ArrayList<>();
-        list.add(new Board("Salam"));
-        list.add(new Board("privet"));
-        list.add(new Board("hello"));
-        list.add(new Board("ni hao"));
+        list.add(new Board("Общайся со своими знакомыми", "", R.drawable.photo2));
+        list.add(new Board("Находи новых друзей", "", R.drawable.photo2));
+        list.add(new Board("Устраивай деловые звонки", "", R.drawable.photo2));
 
     }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -51,7 +38,7 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.ViewHolder> 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, @NonNull int position) {
         holder.bind(position);
     }
 
@@ -62,14 +49,17 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.ViewHolder> 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView textView;
+        public int position;
         private Button btnStart;
+        private ImageView boardPhoto;
+        private TextView textDesc;
 
-
+        private PagerBoardBinding binding;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            binding = PagerBoardBinding.bind(itemView);
             textView = itemView.findViewById(R.id.TextTheme);
-
             btnStart = itemView.findViewById(R.id.btnStart);
             btnStart.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -80,17 +70,19 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.ViewHolder> 
         }
 
         public void bind(int position) {
+
+//            textDesc = itemView.findViewById(R.id.TextTheme);
+//            textView = itemView.findViewById(R.id.btnSkip2);
+//            boardPhoto = itemView.findViewById(R.id.image);
+
             Board board = list.get(position);
-            textView.setText(board.getTitle());
-            if (position == list.size() - 1){
-                btnStart.setVisibility(View.VISIBLE);
+            binding.image.setImageResource(board.getImage());
+            binding.TextTheme.setText(board.getTitle());
 
-
-            }
-            else{
+            if (position == list.size() - 1) {
+                binding.btnStart.setVisibility(View.VISIBLE);
+            } else {
                 btnStart.setVisibility(View.INVISIBLE);
-
-
             }
         }
     }

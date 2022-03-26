@@ -11,14 +11,22 @@
         android:id="@+id/ViewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-    <TextView
+
+    <Button
         android:id="@+id/btnSkip2"
+        app:cornerRadius="10dp"
+        android:textColor="@color/grey"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="visible"
+        app:strokeWidth="2dp"
+        android:layout_marginEnd="10dp"
+        app:strokeColor="@color/grey"
+        android:backgroundTint="@color/white"
         app:layout_constraintTop_toTopOf="parent"
         android:padding="23dp"
-        android:textSize="24sp"
+        android:textSize="14sp"
         android:text="Skip"/>
 
 

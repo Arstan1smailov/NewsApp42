@@ -38,6 +38,19 @@ public class BoardFragment extends Fragment {
         BoardAdapter adapter = new BoardAdapter();
         binding.ViewPager.setAdapter(adapter);
         BoardAdapter boardAdapter = new BoardAdapter();
+        binding.ViewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                if (position == 2){
+                  binding.btnSkip2.setVisibility(View.INVISIBLE);
+                }else
+                {
+                    binding.btnSkip2.setVisibility(View.VISIBLE);
+
+                }
+            }
+        });
         binding.btnSkip2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
