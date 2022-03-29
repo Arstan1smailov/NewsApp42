@@ -35,10 +35,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -66,21 +64,5 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    @Override
-    public boolean onCreateOptionsMenu (Menu menu){
-        menu.add(0,1,0,"clean cash");
-        return super.onCreateOptionsMenu(menu);
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        Et = findViewById(R.id.profileEditText);
-        Image = findViewById(R.id.imageView);
-
-        Et.setText("");
-        Image.setImageResource(R.drawable.photo2);
-        prefs.prefsCash();
-
-        return super.onOptionsItemSelected(item);
-    }
 }

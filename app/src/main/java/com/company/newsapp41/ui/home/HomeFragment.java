@@ -5,6 +5,9 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
@@ -19,6 +22,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import com.company.App;
 import com.company.interfaces.OnItemClickListener;
 import com.company.models.News;
 import com.company.newsapp41.R;
@@ -26,15 +30,21 @@ import com.company.newsapp41.databinding.FragmentHomeBinding;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 public class HomeFragment extends Fragment {
 
    private FragmentHomeBinding binding;
    private NewsAdapter adapter;
+    private List<News> list;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         adapter = new NewsAdapter();
+        List<News> list = App.getDataBase().newsDao().getAll();
+        adapter.addList(list);
+        setHasOptionsMenu(true);
 
     }
 
@@ -43,6 +53,28 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         return binding.getRoot();
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.news_menu1, menu);
+        menu.removeItem(R.id.sort_by_alphabet);
+        menu.removeItem(R.id.clear_pref);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.sort:
+                item.setTitle("Сортировать по алфавиту");
+                list = App.getDataBase().newsDao().getAZ();
+                adapter.addList(list);
+                adapter.notifyDataSetChanged();
+                return true;
+            default:
+                return false;
+        }
     }
 
     @Override

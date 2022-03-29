@@ -3,6 +3,8 @@ package com.company.newsapp41.ui.home;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
+import android.os.Bundle;
+import android.renderscript.ScriptGroup;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,16 +18,19 @@ import com.company.interfaces.OnItemClickListener;
 import com.company.models.News;
 import com.company.newsapp41.R;
 import com.company.newsapp41.databinding.ActivityMainBinding;
+import com.company.newsapp41.databinding.FragmentNewsBinding;
 import com.company.newsapp41.databinding.ItemNewsBinding;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     public ArrayList<News> list;
+    private FragmentNewsBinding binding;
     private OnItemClickListener onItemClickListener;
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
@@ -68,10 +73,11 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         return list.get(position);
     }
 
-    public void updateItem(News news, int position) {
-        list.set(position, news);
-        notifyItemChanged(position);
+    public void addList(List<News> list){
+        this.list.addAll(list);
+        notifyDataSetChanged();
     }
+
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ItemNewsBinding binding;

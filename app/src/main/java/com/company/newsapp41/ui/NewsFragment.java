@@ -10,13 +10,18 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import android.util.Log;
+
+import com.company.App;
+import com.company.Room.AppDataBase;
 import com.company.interfaces.OnItemClickListener;
 import com.company.models.News;
 import com.company.newsapp41.R;
 import com.company.newsapp41.databinding.FragmentHomeBinding;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,7 +73,12 @@ public class NewsFragment extends Fragment {
             });
         }
     }
-
+    private void update(Bundle bundle) {
+        News news = (News) bundle.getSerializable("editTask");
+        news.setTitle(binding.editText.getText().toString());
+        App.getDataBase().newsDao().update(news);
+        close();
+    }
 
     private void save() {
         Bundle bundle = new Bundle();
@@ -83,8 +93,8 @@ public class NewsFragment extends Fragment {
         } else {
             Log.e("TAG", "save: 1111");
             news.setTitle(text);
-
         }
+        App.getDataBase().newsDao().insert(news);
         bundle.putSerializable("news", news);
         getParentFragmentManager().setFragmentResult("rk_news", bundle);
         close();
